@@ -1,7 +1,6 @@
 using ExtensionMethodSamples.MyEnumExtensions;
 using ExtensionMethodSamples.MyStringExtensions;
 using ExtensionMethodSamples.SourceData;
-using System.Collections.Generic;
 using Xunit;
 
 namespace ExtensionMethodSamples

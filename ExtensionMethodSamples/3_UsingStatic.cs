@@ -6,7 +6,7 @@ using static System.Console;
 
 namespace ExtensionMethodSamples
 {
-    public class UsingStaticExmples
+    public class UsingStaticExamples
     {
         [Fact]
         public void Mathing()

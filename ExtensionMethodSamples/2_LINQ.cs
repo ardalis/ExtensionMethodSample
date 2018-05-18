@@ -43,8 +43,17 @@ namespace ExtensionMethodSamples
         public void CountWithFilter()
         {
             int totalStudents = _studentData.Count(s => s.FirstName == "Steve");
+            int count = 0;
+            foreach (var s in _studentData)
+            {
+                if(s.FirstName=="Steve")
+                {
+                    count++;
+                }
+            }
 
             Assert.Equal(1, totalStudents);
+            Assert.Equal(1, count);
         }
 
         [Fact]
@@ -61,8 +70,13 @@ namespace ExtensionMethodSamples
         public void FirstWithFilter()
         {
             Student firstBobStudent = _studentData.First(s => s.FirstName == "Bob");
+            var last = _studentData.Last(s => s.FirstName == "Bob");
+
+            // this blows up
+            //var jeff = _studentData.First(s => s.FirstName == "Jeff");
 
             Assert.Equal("Bob", firstBobStudent.FirstName);
+            Assert.Equal("Bob", last.FirstName);
         }
 
         [Fact]
@@ -100,6 +114,13 @@ namespace ExtensionMethodSamples
             var allCourses = _studentData.SelectMany(s => s.CompletedCourses);
 
             var failedCourses = allCourses.Where(c => !c.GradeReceived.Passing());
+
+            var failedMathCourses = failedCourses.Where(c => c.CourseName == "Calculus");
+
+            var result = _studentData
+                            .SelectMany(s => s.CompletedCourses)
+                            .Where(c => !c.GradeReceived.Passing())
+                            .Where(c => c.CourseName == "Calculus");
 
             Assert.Equal("Calculus", failedCourses.First().CourseName);
         }
